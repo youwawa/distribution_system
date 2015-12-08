@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.yww.distribution.dao.CodePoolMapper">
+    <resultMap id="BaseResultMap" type="com.yww.distribution.entity.CodePool">
+        <result column="code" property="code" jdbcType="VARCHAR" />
+    </resultMap>
+
+    <insert id="insertCodeByList" parameterType="java.util.List">
+        insert into code_pool (code)
+        values
+        <foreach collection="list" item="item" index="index" separator=",">
+            (
+            #{item}
+            )
+        </foreach>
+    </insert>
+
+    <insert id="insertCode" parameterType="java.lang.String">
+        insert into code_pool (code)
+        values (#{code})
+    </insert>
+
+    <select id="selectFirstCode" resultType="java.lang.String">
+        select code from code_pool limit 1
+    </select>
+
+    <delete id="deleteByCode" parameterType="java.lang.String">
+        delete from code_pool
+        where code = #{code}
+    </delete>
+
+    <select id="selectAll" resultType="java.lang.String">
+        select code from code_pool
+    </select>
+
+    <select id="getCodeCount" resultType="java.lang.Integer">
+        select count(0) from code_pool
+    </select>
+</mapper>
