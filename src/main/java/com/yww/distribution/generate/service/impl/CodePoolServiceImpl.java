@@ -14,6 +14,7 @@ import javax.annotation.Resource;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 
+import com.yww.distribution.base.util.UUIDUtils;
 import com.yww.distribution.dao.CodeOrderformMapper;
 import com.yww.distribution.dao.CodePoolMapper;
 import com.yww.distribution.entity.CodeOrderform;
@@ -46,6 +47,7 @@ public class CodePoolServiceImpl implements ICodePoolService {
         codePoolDao.deleteByCode(code);
 
         CodeOrderform bean = new CodeOrderform();
+        bean.setId(UUIDUtils.getUUID());
         bean.setCode(code);
         bean.setEndtime(endtime);
         bean.setExternalId(externalId);
